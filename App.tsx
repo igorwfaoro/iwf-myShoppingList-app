@@ -8,6 +8,10 @@ import ProviderComposerComponent from './src/components/ProviderComposer/Provide
 import ToastProvider from './src/providers/toast.provider';
 import LoaderComponent from './src/components/Loader/Loader.component';
 import LoaderProvider from './src/providers/loader.provider';
+import StorageProvider from './src/providers/storage.provider';
+import AuthServiceProvider from './src/api/services/auth.service';
+import ShoppingListServiceProvider from './src/api/services/shopping-list.service';
+import HttpProvider from './src/api/http';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,25 +27,28 @@ const Stack = createNativeStackNavigator();
 const App: React.FC = () => {
   return (
     <ProviderComposerComponent components={[
+      { component: NavigationContainer },
       { component: ToastProvider },
-      { component: LoaderProvider }
+      { component: LoaderProvider },
+      { component: StorageProvider },
+      { component: HttpProvider },
+      { component: AuthServiceProvider },
+      { component: ShoppingListServiceProvider }
     ]}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main">
+      <Stack.Navigator initialRouteName="Main">
 
-          <Stack.Screen
-            name="Login"
-            component={LoginPage}
-            options={{ headerShown: false }}
-          />
+        <Stack.Screen
+          name="Login"
+          component={LoginPage}
+          options={{ headerShown: false }}
+        />
 
-          <Stack.Screen
-            name="Main"
-            options={{ headerShown: false }}
-          >{() => <MainPage />}</Stack.Screen>
+        <Stack.Screen
+          name="Main"
+          options={{ headerShown: false }}
+        >{() => <MainPage />}</Stack.Screen>
 
-        </Stack.Navigator>
-      </NavigationContainer>
+      </Stack.Navigator>
     </ProviderComposerComponent>
   );
 }

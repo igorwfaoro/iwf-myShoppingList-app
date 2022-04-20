@@ -3,7 +3,7 @@ import LoaderComponent from "../components/Loader/Loader.component";
 
 export interface LoaderProvider {
     show: (message?: string) => void,
-    dismiss: () => void
+    hide: () => void
 }
 
 const LoaderContext = createContext<LoaderProvider | undefined>(undefined);
@@ -18,13 +18,13 @@ const LoaderProvider: React.FC = props => {
         setMessage(message);
     }
 
-    const dismiss = () => {
+    const hide = () => {
         setShowing(false);
         setMessage(undefined);
     }
 
     return (
-        <LoaderContext.Provider value={{ show, dismiss }}>
+        <LoaderContext.Provider value={{ show, hide }}>
             {showing && <LoaderComponent message={message} />}
             {props.children}
         </LoaderContext.Provider>
@@ -33,4 +33,4 @@ const LoaderProvider: React.FC = props => {
 
 export default LoaderProvider;
 
-export const useLoader = () => useContext(LoaderContext);
+export const useLoader = () => useContext(LoaderContext)!;

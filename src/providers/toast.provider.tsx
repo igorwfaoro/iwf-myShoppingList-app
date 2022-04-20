@@ -34,4 +34,4 @@ const ToastProvider: React.FC = props => {
 
 export default ToastProvider;
 
-export const useToast = () => useContext(ToastContext);
+export const useToast = () => useContext(ToastContext)!;

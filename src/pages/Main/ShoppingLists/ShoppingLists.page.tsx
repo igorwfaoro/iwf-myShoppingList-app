@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
-import { createShoppingListApiService } from "../../../api/services/shopping-list.service";
+import { useShoppingListService } from "../../../api/services/shopping-list.service";
 import { ShoppingList } from "../../../models/api/shopping-list";
 import { useLoader } from "../../../providers/loader.provider";
 import { useToast } from "../../../providers/toast.provider";
@@ -10,7 +10,7 @@ const ShoppingListsPage: React.FC = () => {
 
     const loader = useLoader();
     const toast = useToast();
-    const shoppingListService = createShoppingListApiService();
+    const shoppingListService = useShoppingListService();
 
     const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
 
@@ -19,12 +19,12 @@ const ShoppingListsPage: React.FC = () => {
     }, []);
 
     const getShoppingLists = () => {
-        loader?.show();
+        loader.show();
         shoppingListService.getAll().then(response => {
-            setShoppingLists(response.data);
+            setShoppingLists(response);
         }).catch(error => {
-            toast?.show('Erro ao carregar listas de compras', 'error');
-        }).finally(() => loader?.dismiss());
+            toast.show('Erro ao carregar listas de compras', 'error');
+        }).finally(() => loader.dismiss());
     };
 
     return (
