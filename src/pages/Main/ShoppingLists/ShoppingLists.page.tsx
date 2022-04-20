@@ -1,11 +1,42 @@
-import { Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { FlatList, Text, View } from "react-native";
+import { createShoppingListApiService } from "../../../api/services/shopping-list.service";
+import { ShoppingList } from "../../../models/api/shopping-list";
+import { useLoader } from "../../../providers/loader.provider";
+import { useToast } from "../../../providers/toast.provider";
+import ShoppingListItemComponent from "./components/ShoppingListItem/ShoppingListItem.component";
 
 const ShoppingListsPage: React.FC = () => {
 
+    const loader = useLoader();
+    const toast = useToast();
+    const shoppingListService = createShoppingListApiService();
+
+    const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
+
+    useEffect(() => {
+        getShoppingLists();
+    }, []);
+
+    const getShoppingLists = () => {
+        loader?.show();
+        shoppingListService.getAll().then(response => {
+            setShoppingLists(response.data);
+        }).catch(error => {
+            toast?.show('Erro ao carregar listas de compras', 'error');
+        }).finally(() => loader?.dismiss());
+    };
+
     return (
-       <View>
-           <Text>ShoppingListsPage</Text>
-       </View>
+        <View>
+            <Text>Minhas listas</Text>
+
+            <FlatList
+                data={shoppingLists}
+                renderItem={({ item }) => <ShoppingListItemComponent shoppingList={item} />}
+                keyExtractor={item => item.id.toString()}
+            />
+        </View>
     );
 }
 
