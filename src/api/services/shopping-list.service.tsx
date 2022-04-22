@@ -14,7 +14,7 @@ const ShoppingListServiceProvider: React.FC = props => {
     const http = useHttp();
 
     const getAll = async () => {
-        return (await http.get<ShoppingList[]>(URLS.api.shoppingLists.getAll())).data;
+        return (await http().get<ShoppingList[]>(URLS.api.shoppingLists.getAll())).data;
     }
 
     return (

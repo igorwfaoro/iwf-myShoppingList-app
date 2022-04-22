@@ -17,27 +17,21 @@ const AuthServiceProvider: React.FC = props => {
     const storage = useStorage();
 
     const login = async (email: string, password: string) => {
-        const authUser = (await http.post<UserToken>(URLS.api.auth.login, { email, password })).data;
+        const authUser = (await http().post<UserToken>(URLS.api.auth.login, { email, password })).data;
 
-        storage.setData(data => {
-            const newData = {
-                ...data,
-                user: authUser.user,
-                token: authUser.token
-            }
-
-            console.log('@', newData);
-
-            return newData;
+        storage.setData({
+            ...storage.getData(),
+            user: authUser.user,
+            token: authUser.token
         });
 
-        storage.saveData();
+        await storage.saveData();
 
         return authUser;
     }
 
     const isLogged = () => {
-        return !!storage.data.token;
+        return !!storage.getData().token;
     }
 
     return (

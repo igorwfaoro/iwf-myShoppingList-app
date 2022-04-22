@@ -2,6 +2,7 @@ import { NavigationContext } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { Button, Text, TextInput, View } from "react-native";
 import { useAuthService } from "../../api/services/auth.service";
+import ContentComponent from "../../components/Content/Content.component";
 import { useLoader } from "../../providers/loader.provider";
 import { useToast } from "../../providers/toast.provider";
 
@@ -27,7 +28,7 @@ const LoginPage: React.FC = () => {
     }
 
     return (
-        <View>
+        <ContentComponent>
             <Text>LoginPage</Text>
 
             <TextInput
@@ -45,7 +46,7 @@ const LoginPage: React.FC = () => {
             />
 
             <Button title="Entrar" onPress={() => login()} />
-        </View>
+        </ContentComponent>
     );
 }
 

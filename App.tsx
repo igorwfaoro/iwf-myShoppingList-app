@@ -1,5 +1,5 @@
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginPage from './src/pages/Login/Login.page';
@@ -12,15 +12,6 @@ import StorageProvider from './src/providers/storage.provider';
 import AuthServiceProvider from './src/api/services/auth.service';
 import ShoppingListServiceProvider from './src/api/services/shopping-list.service';
 import HttpProvider from './src/api/http';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 const Stack = createNativeStackNavigator();
 
@@ -36,18 +27,16 @@ const App: React.FC = () => {
       { component: ShoppingListServiceProvider }
     ]}>
       <Stack.Navigator initialRouteName="Main">
+          <Stack.Screen
+            name="Login"
+            component={LoginPage}
+            options={{ headerShown: false }}
+          />
 
-        <Stack.Screen
-          name="Login"
-          component={LoginPage}
-          options={{ headerShown: false }}
-        />
-
-        <Stack.Screen
-          name="Main"
-          options={{ headerShown: false }}
-        >{() => <MainPage />}</Stack.Screen>
-
+          <Stack.Screen
+            name="Main"
+            options={{ headerShown: false }}
+          >{() => <MainPage />}</Stack.Screen>
       </Stack.Navigator>
     </ProviderComposerComponent>
   );

@@ -1,5 +1,6 @@
 import { Text, View } from "react-native";
 import { ShoppingList } from "../../../../../models/api/shopping-list";
+import { shoppingListItemStyles } from "./ShoppingListItem.styles";
 
 interface ShoppingListItemComponentProps {
     shoppingList: ShoppingList;
@@ -7,9 +8,9 @@ interface ShoppingListItemComponentProps {
 
 const ShoppingListItemComponent: React.FC<ShoppingListItemComponentProps> = props => {
     return (
-       <View>
-           <Text>{props.shoppingList.name}</Text>
-       </View>
+        <View style={shoppingListItemStyles.item}>
+            <Text style={shoppingListItemStyles.itemText}>{props.shoppingList.name}</Text>
+        </View>
     );
 }
 
