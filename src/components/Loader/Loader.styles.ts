@@ -17,8 +17,7 @@ export const loaderStyles = StyleSheet.create({
     box: {
         backgroundColor: '#ffffff',
         borderRadius: 20,
-        padding: 16,
-        gap: 6
+        padding: 16
     },
     text: {
         fontSize: 14,

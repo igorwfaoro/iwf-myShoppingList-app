@@ -5,6 +5,7 @@ import { useHttp } from "../http";
 
 export interface ShoppingListService {
     getAll(): Promise<ShoppingList[]>;
+    getById(id: number): Promise<ShoppingList>;
 }
 
 const ShoppingListServiceContext = createContext<ShoppingListService | undefined>(undefined);
@@ -17,8 +18,12 @@ const ShoppingListServiceProvider: React.FC = props => {
         return (await http().get<ShoppingList[]>(URLS.api.shoppingLists.getAll())).data;
     }
 
+    const getById = async (id: number) => {
+        return (await http().get<ShoppingList>(URLS.api.shoppingLists.getById(id))).data;
+    }
+
     return (
-        <ShoppingListServiceContext.Provider value={{ getAll }}>
+        <ShoppingListServiceContext.Provider value={{ getAll, getById }}>
             {props.children}
         </ShoppingListServiceContext.Provider>
     );

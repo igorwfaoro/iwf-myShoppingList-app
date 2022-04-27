@@ -1,24 +1,21 @@
-import { NavigationContext } from "@react-navigation/native";
-import { useContext, useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
-import { useShoppingListService } from "../../../api/services/shopping-list.service";
-import ContentComponent from "../../../components/Content/Content.component";
-import { ShoppingList } from "../../../models/api/shopping-list";
-import { useLoader } from "../../../providers/loader.provider";
-import { useToast } from "../../../providers/toast.provider";
+import { useEffect, useState } from "react";
+import { FlatList } from "react-native";
+import { useShoppingListService } from "../../../../api/services/shopping-list.service";
+import ContentComponent from "../../../../components/Content/Content.component";
+import { ShoppingList } from "../../../../models/api/shopping-list";
+import { useLoader } from "../../../../providers/loader.provider";
+import { useToast } from "../../../../providers/toast.provider";
 import ShoppingListItemComponent from "./components/ShoppingListItem/ShoppingListItem.component";
 
-const ShoppingListsPage: React.FC = () => {
+const ShoppingListsListPage: React.FC = () => {
 
     const loader = useLoader();
     const toast = useToast();
     const shoppingListService = useShoppingListService();
-    const navigation = useContext(NavigationContext)!;
 
     const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
 
     useEffect(() => {
-        navigation.setOptions({ title: "Minhas Listas" });
         getShoppingLists();
     }, []);
 
@@ -42,4 +39,4 @@ const ShoppingListsPage: React.FC = () => {
     );
 }
 
-export default ShoppingListsPage;
+export default ShoppingListsListPage;

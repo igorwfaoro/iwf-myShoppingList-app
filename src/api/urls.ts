@@ -7,7 +7,11 @@ export const URLS = {
             login: `${BASE_API_URL}/${V1}/auth/login`
         },
         shoppingLists: {
-            getAll: () => `${BASE_API_URL}/${V1}/shoppingLists`
+            getAll: () => `${BASE_API_URL}/${V1}/shoppingLists`,
+            getById: (id: number) => `${BASE_API_URL}/${V1}/shoppingLists/${id}`
+        },
+        products: {
+            getByBarcode: (barcode: string) => `${BASE_API_URL}/${V1}/products/barcode/${barcode}`
         }
     }
 }
