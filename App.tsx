@@ -11,6 +11,7 @@ import AuthServiceProvider from './src/api/services/auth.service';
 import ShoppingListServiceProvider from './src/api/services/shopping-list.service';
 import HttpProvider from './src/api/http';
 import ProductServiceProvider from './src/api/services/product.service';
+import AccountPage from './src/pages/Account/Account.page';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,14 @@ const App: React.FC = () => {
         <Stack.Screen
           name="Login"
           component={LoginPage}
+          options={{
+            headerShown: false
+          }}
+        />
+
+        <Stack.Screen
+          name="Account"
+          component={AccountPage}
           options={{
             headerShown: false
           }}

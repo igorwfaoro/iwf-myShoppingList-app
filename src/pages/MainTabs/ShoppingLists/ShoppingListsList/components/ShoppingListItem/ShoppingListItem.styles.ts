@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const shoppingListItemStyles = StyleSheet.create({
+export const styles = StyleSheet.create({
     item: {
         paddingTop: 8,
         paddingBottom: 8,

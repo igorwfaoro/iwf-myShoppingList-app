@@ -6,6 +6,7 @@ import { useHttp } from "../http";
 
 export interface AuthService {
     login(email: string, password: string): Promise<UserToken>;
+    logout(): Promise<void>;
     isLogged(): boolean;
 }
 
@@ -30,12 +31,16 @@ const AuthServiceProvider: React.FC = props => {
         return authUser;
     }
 
+    const logout = async () => {
+        await storage.clearData();
+    }
+
     const isLogged = () => {
         return !!storage.getData().token;
     }
 
     return (
-        <AuthServiceContext.Provider value={{ login, isLogged }}>
+        <AuthServiceContext.Provider value={{ login, logout, isLogged }}>
             {props.children}
         </AuthServiceContext.Provider>
     );

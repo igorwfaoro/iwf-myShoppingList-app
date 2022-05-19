@@ -6,6 +6,7 @@ import { useAuthService } from "../../api/services/auth.service";
 import { useContext, useEffect, useState } from "react";
 import { NavigationContext } from "@react-navigation/native";
 import AddProductPage from "./AddProduct/AddProduct.page";
+import { Button } from "react-native";
 
 const MainTabs: React.FC = () => {
 
@@ -13,8 +14,20 @@ const MainTabs: React.FC = () => {
     const authService = useAuthService();
     const navigation = useContext(NavigationContext)!;
 
+    const headerRight = () => {
+        return (
+            <Button
+                title="Logout"
+                onPress={() => {
+                    authService.logout();
+                    navigation.navigate('Login');
+                }}
+            />
+        );
+    }
+
     return (
-        <Tab.Navigator initialRouteName="Home">
+        <Tab.Navigator initialRouteName="Home" screenOptions={{ headerRight }}>
             <Tab.Screen
                 name="Home"
                 component={HomePage}

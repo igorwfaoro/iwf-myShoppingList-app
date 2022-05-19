@@ -7,6 +7,7 @@ const STORAGE_KEY = 'app-data';
 export interface StorageProvider {
     getData(): Partial<AppDataStorage>;
     setData(data: Partial<AppDataStorage>): void;
+    clearData(): Promise<void>;
     saveData(): Promise<void>;
     loadData(): Promise<void>;
 }
@@ -37,12 +38,17 @@ const StorageProvider: React.FC = props => {
             DATA = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
     }
 
+    const clearData = async () => {
+        DATA = {};
+        await saveData();
+    }
+
     const getData = () => DATA;
 
     const setData = (data: Partial<AppDataStorage>) => DATA = data;
 
     return (
-        <StorageContext.Provider value={{ getData, setData, saveData, loadData }}>
+        <StorageContext.Provider value={{ getData, setData, clearData, saveData, loadData }}>
             {props.children}
         </StorageContext.Provider>
     );

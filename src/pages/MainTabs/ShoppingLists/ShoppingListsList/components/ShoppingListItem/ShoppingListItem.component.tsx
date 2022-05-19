@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { ShoppingList } from "../../../../../../models/api/shopping-list";
-import { shoppingListItemStyles } from "./ShoppingListItem.styles";
+import { styles } from "./ShoppingListItem.styles";
 import Ionicon from '@expo/vector-icons/Ionicons';
 import { useContext } from "react";
 import { NavigationContext } from "@react-navigation/native";
@@ -23,8 +23,8 @@ const ShoppingListItemComponent: React.FC<ShoppingListItemComponentProps> = prop
 
     return (
         <TouchableOpacity onPress={() => goToDetails()}>
-            <View style={shoppingListItemStyles.item}>
-                <Text style={shoppingListItemStyles.itemText}>{props.shoppingList.name}</Text>
+            <View style={styles.item}>
+                <Text style={styles.itemText}>{props.shoppingList.name}</Text>
                 <Ionicon name="md-chevron-forward-outline" size={20} color="gray" />
             </View>
         </TouchableOpacity>
