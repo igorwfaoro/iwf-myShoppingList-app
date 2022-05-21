@@ -29,14 +29,30 @@ const InputCounter: React.FC<InputCounterProps> = props => {
 
     return (
         <View style={styles.container}>
-            <TouchableHighlight onPress={() => decrease()}>
-                <Ionicon name="md-remove-outline" size={20} color="gray" />
+            <TouchableHighlight
+                style={styles.actionButton}
+                onPress={() => decrease()}
+            >
+                <Ionicon
+                    style={styles.actionButtonIcon}
+                    name="md-remove-outline"
+                    size={20}
+                    color="gray"
+                />
             </TouchableHighlight>
 
-            <Text>{value}</Text>
+            <Text style={styles.text}>{value}</Text>
 
-            <TouchableHighlight onPress={() => increase()}>
-                <Ionicon name="md-add-outline" size={20} color="gray" />
+            <TouchableHighlight
+                style={styles.actionButton}
+                onPress={() => increase()}
+            >
+                <Ionicon
+                    style={styles.actionButtonIcon}
+                    name="md-add-outline"
+                    size={20}
+                    color="gray"
+                />
             </TouchableHighlight>
         </View>
     );

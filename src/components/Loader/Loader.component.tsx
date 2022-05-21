@@ -11,7 +11,7 @@ const LoaderComponent: React.FC<LoaderComponentProps> = props => {
     return (
         <View style={loaderStyles.container}>
             <View style={loaderStyles.box}>
-                <ActivityIndicator size="large" color={themeVariables.colorPrimary} />
+                <ActivityIndicator size="large" color={themeVariables.colors.primary} />
                 <Text style={loaderStyles.text}>{props.message || 'Carregando...'}</Text>
             </View>
         </View>
