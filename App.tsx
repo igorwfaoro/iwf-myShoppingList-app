@@ -12,12 +12,15 @@ import ShoppingListServiceProvider from './src/api/services/shopping-list.servic
 import HttpProvider from './src/api/http';
 import ProductServiceProvider from './src/api/services/product.service';
 import AccountPage from './src/pages/Account/Account.page';
+import { ThemeProvider } from '@rneui/themed';
+import { appTheme } from './src/theme/theme';
 
 const Stack = createNativeStackNavigator();
 
 const App: React.FC = () => {
   return (
     <ProviderComposerComponent components={[
+      { component: ThemeProvider, props: { theme: appTheme } },
       { component: NavigationContainer },
       { component: ToastProvider },
       { component: LoaderProvider },
