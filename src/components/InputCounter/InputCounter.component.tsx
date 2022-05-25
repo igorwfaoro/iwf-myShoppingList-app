@@ -3,13 +3,13 @@ import Ionicon from '@expo/vector-icons/Ionicons';
 import { useEffect, useState } from "react";
 import { styles } from "./InputCounter.styles";
 
-interface InputCounterProps {
+interface InputCounterComponentProps {
     minValue?: number;
     initialValue: number;
     onChange: (value: number) => void;
 }
 
-const InputCounter: React.FC<InputCounterProps> = props => {
+const InputCounterComponent: React.FC<InputCounterComponentProps> = props => {
 
     const [value, setValue] = useState(props.initialValue);
 
@@ -58,4 +58,4 @@ const InputCounter: React.FC<InputCounterProps> = props => {
     );
 }
 
-export default InputCounter;
+export default InputCounterComponent;

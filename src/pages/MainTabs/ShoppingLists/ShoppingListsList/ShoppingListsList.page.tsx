@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import { useShoppingListService } from "../../../../api/services/shopping-list.service";
 import ContentComponent from "../../../../components/Content/Content.component";
 import { ShoppingList } from "../../../../models/api/shopping-list";

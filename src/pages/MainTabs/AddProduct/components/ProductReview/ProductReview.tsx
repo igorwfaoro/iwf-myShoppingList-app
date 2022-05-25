@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import InputCounter from "../../../../../components/InputCounter/InputCounter.component";
 import { Product } from "../../../../../models/api/product";
 import { styles } from "./ProductReview.styles";
 import { Button } from '@rneui/themed';
 import { useShoppingListService } from "../../../../../api/services/shopping-list.service";
 import { ShoppingList } from "../../../../../models/api/shopping-list";
 import { useToast } from "../../../../../providers/toast.provider";
-import RNPickerSelect from "react-native-picker-select";
 import SelectPickerComponent from "../../../../../components/SelectPicker/SelectPicker.component";
+import InputCounterComponent from "../../../../../components/InputCounter/InputCounter.component";
 
 interface ProductReviewProps {
     product: Product;
@@ -63,7 +62,7 @@ const ProductReviewComponent: React.FC<ProductReviewProps> = props => {
             <Text style={styles.barcode}>{props.product.barcode}</Text>
 
             <View style={styles.quantity}>
-                <InputCounter
+                <InputCounterComponent
                     minValue={1}
                     initialValue={quantity}
                     onChange={setQuantity}

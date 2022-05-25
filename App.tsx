@@ -15,14 +15,20 @@ import AccountPage from './src/pages/Account/Account.page';
 import { ThemeProvider } from '@rneui/themed';
 import { appTheme } from './src/theme/theme';
 import ShoppingListProductProvider from './src/api/services/shopping-list-product.service';
+import ModalProvider from './src/providers/modal.provider';
+import moment from 'moment';
 
 const Stack = createNativeStackNavigator();
 
 const App: React.FC = () => {
+
+  moment.locale('pt-br');
+
   return (
     <ProviderComposerComponent components={[
       { component: ThemeProvider, props: { theme: appTheme } },
       { component: NavigationContainer },
+      { component: ModalProvider },
       { component: ToastProvider },
       { component: LoaderProvider },
       { component: StorageProvider },
