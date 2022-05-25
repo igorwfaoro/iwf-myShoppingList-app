@@ -1,4 +1,4 @@
-const BASE_API_URL = 'http://localhost:3333';
+const BASE_API_URL = 'http://192.168.15.9:3333';
 const V1 = 'v1';
 
 export const URLS = {
@@ -12,6 +12,9 @@ export const URLS = {
         },
         products: {
             getByBarcode: (barcode: string) => `${BASE_API_URL}/${V1}/products/barcode/${barcode}`
-        }
+        },
+        shoppingListProducts: {
+            add: (shoppingListId: number) => `${BASE_API_URL}/${V1}/shoppingLists/${shoppingListId}/products/add`
+        },
     }
 }

@@ -14,6 +14,7 @@ import ProductServiceProvider from './src/api/services/product.service';
 import AccountPage from './src/pages/Account/Account.page';
 import { ThemeProvider } from '@rneui/themed';
 import { appTheme } from './src/theme/theme';
+import ShoppingListProductProvider from './src/api/services/shopping-list-product.service';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +29,8 @@ const App: React.FC = () => {
       { component: HttpProvider },
       { component: AuthServiceProvider },
       { component: ShoppingListServiceProvider },
-      { component: ProductServiceProvider }
+      { component: ProductServiceProvider },
+      { component: ShoppingListProductProvider }
     ]}>
       <Stack.Navigator initialRouteName="Main">
 

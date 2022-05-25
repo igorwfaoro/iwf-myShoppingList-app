@@ -1,23 +1,49 @@
-import { useState } from "react";
-import { Image, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 import InputCounter from "../../../../../components/InputCounter/InputCounter.component";
 import { Product } from "../../../../../models/api/product";
-import { ShoppingListProductCreateDto } from "../../../../../models/dto/shopping-list-product-create.dto";
 import { styles } from "./ProductReview.styles";
 import { Button } from '@rneui/themed';
+import { useShoppingListService } from "../../../../../api/services/shopping-list.service";
+import { ShoppingList } from "../../../../../models/api/shopping-list";
+import { useToast } from "../../../../../providers/toast.provider";
+import RNPickerSelect from "react-native-picker-select";
+import SelectPickerComponent from "../../../../../components/SelectPicker/SelectPicker.component";
 
 interface ProductReviewProps {
     product: Product;
-    onConfirm: (shoppingListProduct: ShoppingListProductCreateDto) => void;
+    onConfirm: (params: {
+        shoppingListId: number;
+        productId: number;
+        quantity: number;
+    }) => void;
     onCancel: () => void;
 }
 
 const ProductReviewComponent: React.FC<ProductReviewProps> = props => {
 
+    const shoppingListService = useShoppingListService();
+    const toast = useToast();
+
+    const [shoppingLists, setShoppingLists] = useState<ShoppingList[]>([]);
+    const [selectedShoppingList, setSelectedShoppingList] = useState<ShoppingList>();
     const [quantity, setQuantity] = useState(1);
 
+    useEffect(() => {
+        shoppingListService.getAll().then(response => {
+            setShoppingLists(response);
+        }).catch(() => toast.show('Erro ao carregar listas de compras'));
+    }, []);
+
     const confirm = () => {
+
+        if (!selectedShoppingList) {
+            toast.show('Selecione uma lista de compras');
+            return;
+        }
+
         props.onConfirm({
+            shoppingListId: selectedShoppingList!.id,
             productId: props.product.id,
             quantity: quantity
         });
@@ -41,6 +67,14 @@ const ProductReviewComponent: React.FC<ProductReviewProps> = props => {
                     minValue={1}
                     initialValue={quantity}
                     onChange={setQuantity}
+                />
+            </View>
+
+            <View style={styles.shoppingLists}>
+                <SelectPickerComponent
+                    placeholder="Selecione uma lista de compras"
+                    onValueChange={(value: { value: ShoppingList }) => setSelectedShoppingList(value.value)}
+                    items={shoppingLists.map(sl => ({ label: sl.name, value: sl }))}
                 />
             </View>
 

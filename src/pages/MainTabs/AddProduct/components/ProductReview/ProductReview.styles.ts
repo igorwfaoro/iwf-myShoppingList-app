@@ -10,8 +10,7 @@ export const styles = StyleSheet.create({
     },
     image: {
         width: Dimensions.get("window").width * 0.7,
-        height: Dimensions.get("window").width * 0.7,
-        flex: 1
+        height: Dimensions.get("window").width * 0.7
     },
     title: {
         fontSize: 20,
@@ -29,6 +28,9 @@ export const styles = StyleSheet.create({
         marginTop: 5
     },
     quantity: {
+        marginTop: 10
+    },
+    shoppingLists: {
         marginTop: 10
     },
     actions: {
